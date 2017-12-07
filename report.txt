@@ -1,0 +1,6 @@
+scapy version -  2.3.2
+
+
+reference -
+https://www.sans.org/
+https://thepacketgeek.com/scapy-p-09-scapy-and-dns/
