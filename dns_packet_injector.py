@@ -71,7 +71,7 @@ def packet_spoofing(pack):
 
 
 def is_valid_packet(pack):
-    return True if pack.haslayer(DNSQR) else False
+    return True if DNS in pack and DNSQR in pack  else False
 
 
 def get_ip_to_redirect(query_name):
