@@ -86,8 +86,8 @@ def set_local_ip():
 
 
 if __name__ == "__main__":
-    # executor()
-    print load_file("hostnames")
-    print hf_d
-    set_local_ip()
-    print local_ip
+     executor()
+    # print load_file("hostnames")
+    # print hf_d
+    # set_local_ip()
+    # print local_ip
