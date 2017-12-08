@@ -1,7 +1,7 @@
 import argparse
 import socket
 
-from scapy.all import sniff
+from scapy.all import *
 
 hf_d = {}
 local_ip = "127.0.0.1"
