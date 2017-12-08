@@ -4,3 +4,29 @@ scapy version -  2.3.2
 reference -
 https://www.sans.org/
 https://thepacketgeek.com/scapy-p-09-scapy-and-dns/
+https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-of-eth0-in-python
+
+
+
+Guidelines for HW4 submission
+Please take care of the following general guidelines before hw4 submission:
+
+1. Compress your submission folder using tar-gzip. Do not just rename the compressed folder to change the extensions to .tar.gz .
+
+2. Name your final submission <SBU_ID>_<Last_Name>.tar.gz
+
+3. Add Makefile(if needed)
+
+4. Please add a sample pcap trace that works with your program.
+
+4. In your report.txt, for both dnsinject and dnsdetect have a dedicated section on
+ How to compile,
+ Working examples of commands to run your program
+ General design
+ How do you take care of false positives( in case of dnsdetect)
+The OS version you have tested your code on, Language and the version used.
+Detection output for the attached pcap trace file.
+
+5. If you have used any standard code available over the internet, even if for a part of your hw, make sure you provide the citation
+
+Please follow all the instructions given with the homework.
