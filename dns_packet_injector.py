@@ -71,11 +71,18 @@ def packet_spoofing(pack):
 
 
 def is_valid_packet(pack):
-    return True if DNS in pack  and pack[DNS].qr==0 else False
+    if DNS in pack  and pack[DNS].qr==0 :
+        if DNSQR in pack:
+            if pack[DNSQR].qtype==1 :
+                return True
+    return False
 
 
 def get_ip_to_redirect(query_name):
-    return hf_d.get(query_name, local_ip)
+    if hf_d is None:
+        return local_ip
+    else:
+        return hf_d.get(query_name,None)
 
 
 def set_local_ip():
