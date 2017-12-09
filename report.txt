@@ -12,7 +12,7 @@ Reference -
 https://www.sans.org/
 https://thepacketgeek.com/scapy-p-09-scapy-and-dns/
 https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-of-eth0-in-python
-
+https://stackoverflow.com/questions/20165843/argparse-how-to-handle-variable-number-of-arguments-nargs
 
 
 Guidelines for HW4 submission

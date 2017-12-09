@@ -1,6 +1,6 @@
 import argparse
 
-from scapy.all import *
+# from scapy.all import *
 
 hf_flag = 0
 hf_d = {}
@@ -14,7 +14,7 @@ def arg_parser():
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter, add_help=False)
     parser.add_argument('-i', '--interface', help="interface to capture")
     parser.add_argument('-h', '--host_names', help="hostname to capture")
-    parser.add_argument('--bpf_filter', nargs='*', help='bpf filter name')
+    parser.add_argument('bpf_filter', nargs='*', help='bpf filter name')
     parsed_args = parser.parse_args()
     return parsed_args
 
@@ -103,8 +103,9 @@ def set_local_ip():
 
 
 if __name__ == "__main__":
-    executor()
+    # executor()
     # print load_file("hostnames")
     # print hf_d
     # set_local_ip()
     # print local_ip
+    print arg_parser()

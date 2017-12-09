@@ -29,7 +29,7 @@ def arg_parser():
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-i', '--interface', help="interface to capture")
     parser.add_argument('-r', '--trace_file_path', help="please provide the trace file path")
-    parser.add_argument('--bpf_filter', nargs='*', help='bpf filter name')
+    parser.add_argument('bpf_filter', nargs='*', help='bpf filter name')
     parsed_args = parser.parse_args()
     return parsed_args
 
