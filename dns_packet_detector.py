@@ -73,7 +73,7 @@ def spoofing_detect(pack):
         print "DNS poisoning attempt"
         print "TXID {t_id} Request {request_name}".format(t_id=pack[DNS].id, request_name=pack[DNS].qd.qname.strip())
         print "Answer1 {prev_data}".format(prev_data=" ".join(a1_l))
-        print "Answer2 {present_data}".format(present_data=" ".join(a2_l))
+        print "Answer2 {present_data}\n\n".format(present_data=" ".join(a2_l))
 
 
 def previous_packet(pack):
