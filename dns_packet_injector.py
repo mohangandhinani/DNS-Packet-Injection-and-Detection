@@ -2,6 +2,7 @@ import argparse
 
 from scapy.all import *
 
+hf_flag = 0
 hf_d = {}
 local_ip = "127.0.0.1"
 
@@ -39,6 +40,9 @@ def executor():
     set_local_ip()
     parsed_args = arg_parser()
     # print_args(parsed_args)
+    global hf_flag
+    if parsed_args.host_names:
+        hf_flag = 1
     if parsed_args.host_names:
         load_file(parsed_args.host_names)
 
@@ -54,7 +58,7 @@ def load_file(file_path):
     with open(file_path, "r") as hf:
         for line in hf:
             ip, host_name = [i for i in line.strip().split(" ") if i]
-            host_name = host_name+'.'
+            host_name = host_name + '.'
             hf_d[host_name] = ip
 
 
@@ -82,10 +86,13 @@ def is_valid_packet(pack):
 
 
 def get_ip_to_redirect(query_name):
-    if not hf_d:
-        return local_ip
+    if hf_flag:
+        if query_name in hf_d:
+            return hf_d[query_name]
+        else:
+            return None
     else:
-        return hf_d.get(query_name, None)
+        return local_ip
 
 
 def set_local_ip():
