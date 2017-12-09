@@ -70,7 +70,7 @@ def spoofing_detect(pack):
         for j in xrange(prev_pack[DNS].ancount):
             if prev_pack[DNS].an[j].type == 1:
                 a2_l.append(prev_pack[DNS].an[j].rdata)
-        print "DNS poisoning attempt"
+        print "{time} DNS poisoning attempt".format(time=pack.t)
         print "TXID {t_id} Request {request_name}".format(t_id=pack[DNS].id, request_name=pack[DNS].qd.qname.strip())
         print "Answer1 {prev_data}".format(prev_data=" ".join(a1_l))
         print "Answer2 {present_data}\n\n".format(present_data=" ".join(a2_l))
