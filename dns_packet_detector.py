@@ -64,7 +64,7 @@ def spoofing_detect(pack):
         # //FIXME : payload needeed?
         a1_l = []
         a2_l = []
-        for i in pack[DNS].ancount:
+        for i in xrange(pack[DNS].ancount):
             if pack[DNS].an[i].type == 1:
                 a1_l.append(pack[DNS].an[i].rdata)
         for j in prev_pack[DNS].ancount:
