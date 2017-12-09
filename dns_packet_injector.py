@@ -70,7 +70,7 @@ def packet_spoofing(pack):
 
 
 def is_valid_packet(pack):
-    if pack.haslayer[DNSQR] and pack.haslayer(DNS) and pack[DNS].qr == 0 and pack[DNSQR].qtype == 1:
+    if pack.haslayer(DNSQR) and pack.haslayer(DNS) and pack[DNS].qr == 0 and pack[DNSQR].qtype == 1:
         return True
     return False
 

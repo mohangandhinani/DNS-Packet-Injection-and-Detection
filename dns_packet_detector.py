@@ -3,6 +3,45 @@ import argparse
 detect_dict = {}
 
 
+
+
+
+
+
+def executor():
+    parsed_args = arg_parser()
+    # print_args(parsed_args)
+    if  parsed_args.interface and parsed_args.trace_file_path:
+        print "Please use interface or trace option"
+        return
+
+    filter = "udp port 53 and {bpf}".format(bpf=parsed_args.bpf_filter) if parsed_args.bpf_filter else 'udp port 53'
+    if parsed_args.interface is not None:
+        sniff(filter=filter, iface=parsed_args.interface, store=0, prn=spoofing_detect)
+    else:
+        sniff(filter=filter, store=0, prn=spoofing_detect)
+
+    # elif flagi == 0 and flagt == 1:
+    # print "Sniffing from the tracefile"
+    # sniff(filter=expression, offline=tracefile, store=0, prn=dns_detect)
+    # elif flagi == 1:
+    # print "Sniffing on interface"
+    # sniff(filter=expression, iface=interface, store=0, prn=dns_detect)
+    # else:
+    # print "sniffing on all interfaces"
+    # sniff(filter=expression, store=0, prn=dns_detect)
+    #
+
+def arg_parser():
+    # Required Options
+    parser = argparse.ArgumentParser(prog='dns_packet_injector.py',
+                                     description="Please specify the interface to capture ,tracefile path ",
+                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-i', '--interface', help="interface to capture")
+    parser.add_argument('-r', '--trace_file_path', help="please provide the trace file path")
+    parsed_args = parser.parse_args()
+    return parsed_args
+
 def detector(pack):
     prev_pack = is_valid_packet(pack)
     if prev_pack[IP].dst == pack[IP].dst and \
@@ -29,28 +68,5 @@ def is_valid_packet(pack):
     else:
         return False
 
-
-def arg_parser():
-    # Required Options
-    parser = argparse.ArgumentParser(prog='dns_packet_injector.py',
-                                     description="Please specify the interface to capture ,tracefile path ",
-                                     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-i', '--interface', help="interface to capture")
-    parser.add_argument('-r', '--trace_file_path', help="please provide the trace file path")
-    parsed_args = parser.parse_args()
-    return parsed_args
-
-def executor():
-    # elif flagi == 0 and flagt == 1:
-    # print "Sniffing from the tracefile"
-    # sniff(filter=expression, offline=tracefile, store=0, prn=dns_detect)
-    # elif flagi == 1:
-    # print "Sniffing on interface"
-    # sniff(filter=expression, iface=interface, store=0, prn=dns_detect)
-    # else:
-    # print "sniffing on all interfaces"
-    # sniff(filter=expression, store=0, prn=dns_detect)
-    #
-
 if __name__ == "__main__":
-    print arg_parser()
+    executor()
