@@ -1,7 +1,14 @@
+Design :
+
+
+
+Software Details :
 scapy version -  2.3.2
+language used - python
+os version - ubuntu 16.10 virtual machine(for injector)
+and windows 10 for victim
 
-
-reference -
+Reference -
 https://www.sans.org/
 https://thepacketgeek.com/scapy-p-09-scapy-and-dns/
 https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-of-eth0-in-python
