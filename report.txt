@@ -42,13 +42,39 @@ Answer1 172.24.24.212
 Answer2 172.217.12.165
 
 *****************************************************************************************************************
-sudo python dns_packet_detector.py -r /home/osboxes/Desktop/inject_capture.pcapng
+sudo python dns_packet_detector.py -r inject_capture.pcap
 output ::
-1981-02-28 21:28:58 DNS poisoning attempt
-TXID 19258 Request bar6.pqr.com.
 
-Answer1 
-Answer2 172.24.24.212
+2017-12-10 20:57:52 DNS poisoning attempt
+TXID 62198 Request dyn.keepa.com.
+Answer1 172.24.17.11
+Answer2 148.251.130.134
+
+
+2017-12-10 20:57:56 DNS poisoning attempt
+TXID 58515 Request arc.msn.com.
+Answer1 172.24.17.11
+Answer2 65.52.108.103
+
+
+2017-12-10 20:58:15 DNS poisoning attempt
+TXID 25697 Request fls-na.amazon.com.
+Answer1 172.24.17.11
+Answer2 34.226.16.30 34.236.97.196 52.5.207.149 107.21.53.248 34.202.82.14 34.192.131.202 34.204.253.230 34.238.14.186
+
+
+2017-12-10 20:58:15 DNS poisoning attempt
+TXID 16993 Request images-na.ssl-images-amazon.com.
+Answer1 172.24.17.11
+Answer2 52.84.32.155
+
+
+2017-12-10 20:58:15 DNS poisoning attempt
+TXID 9149 Request s.amazon-adsystem.com.
+Answer1 172.24.17.11
+Answer2 72.21.206.140
+
+
 
 --------------------------------------------------------------------------------------------------------
 Software Details :
@@ -62,7 +88,8 @@ pcap file
 inject_capure.pcapng
 
 packet filter
-((frame.protocols=="eth:ethertype:ip:udp:dns")&&(dns.qry.name=="bar6.pqr.com"))
+(frame.protocols=="eth:ethertype:ip:udp:dns")&&(dns.qry.name=="abjfdk.com")
+
 -----------------------------------------------------------------------------------------------------------------
 Design :
 
