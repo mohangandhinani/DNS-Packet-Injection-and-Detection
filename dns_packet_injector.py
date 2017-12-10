@@ -18,7 +18,6 @@ def arg_parser():
     parsed_args = parser.parse_args()
     return parsed_args
 
-
 def print_args(parsed_args):
     if parsed_args.interface is None:
         print "No interface given capturing on all interfaces"

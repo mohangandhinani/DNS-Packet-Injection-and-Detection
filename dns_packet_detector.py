@@ -1,5 +1,6 @@
 import argparse
 from datetime import datetime
+
 from scapy.all import *
 
 detect_dict = {}
@@ -59,10 +60,8 @@ def spoofing_detect(pack):
                     prev_pack[IP].sport == pack[IP].sport and \
                     prev_pack[IP].dport == pack[IP].dport and \
                     prev_pack[DNS].qd.qname == pack[DNS].qd.qname and \
-                    prev_pack[IP].payload != pack[IP].payload :
-        # //FIXME : add ip a checking
-        # //FIXME : source  ip same?
-        # //FIXME : payload needeed?
+                    prev_pack[IP].payload != pack[IP].payload:
+
         a1_l = []
         a2_l = []
         for i in xrange(pack[DNS].ancount):
@@ -71,16 +70,18 @@ def spoofing_detect(pack):
         for j in xrange(prev_pack[DNS].ancount):
             if prev_pack[DNS].an[j].type == 1:
                 a2_l.append(prev_pack[DNS].an[j].rdata)
-        spoof_flag =0
-        if not(set(a1_l)&set(a2_l)):
-            spoof_flag =1
-        if not(pack[IP].ttl == prev_pack[IP].ttl):
-            spoof_flag =1
-        if not (pack[Ether].src==prev_pack[Ether].src):
-            spoof_flag =1
+        spoof_flag = 0
+        if not (set(a1_l) & set(a2_l)):
+            spoof_flag = 1
+        if not (pack[IP].ttl == prev_pack[IP].ttl):
+            spoof_flag = 1
+        if not (pack[Ether].src == prev_pack[Ether].src):
+            spoof_flag = 1
         if spoof_flag:
-            print "{time} DNS poisoning attempt".format(time=datetime.fromtimestamp(pack.time).strftime('%Y-%m-%d %H:%M:%S'))
-            print "TXID {t_id} Request {request_name}".format(t_id=pack[DNS].id, request_name=pack[DNS].qd.qname.strip())
+            print "{time} DNS poisoning attempt".format(
+                time=datetime.fromtimestamp(pack.time).strftime('%Y-%m-%d %H:%M:%S'))
+            print "TXID {t_id} Request {request_name}".format(t_id=pack[DNS].id,
+                                                              request_name=pack[DNS].qd.qname.strip())
             print "Answer1 {prev_data}".format(prev_data=" ".join(a1_l))
             print "Answer2 {present_data}\n\n".format(present_data=" ".join(a2_l))
 
@@ -89,8 +90,8 @@ def previous_packet(pack):
     if len(detect_dict) == 1000:
         detect_dict.clear()
     if pack.haslayer(DNSRR) and pack.haslayer(DNS):
-        key = pack[IP].dst+'_'+str(pack[DNS].id)
-        prev_pack = detect_dict.get(key , None)
+        key = pack[IP].dst + '_' + str(pack[DNS].id)
+        prev_pack = detect_dict.get(key, None)
         if prev_pack is None:
             detect_dict[key] = pack
         else:

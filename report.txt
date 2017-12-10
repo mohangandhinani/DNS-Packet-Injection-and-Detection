@@ -1,9 +1,4 @@
-Design :
-false positives :
-ttl
-same record
-mac
-____________________________________________________________________________________________________________
+_________________________________________________________________________________________________________
 commands:
 
 INJECTOR
@@ -58,11 +53,47 @@ Answer2 172.24.24.212
 --------------------------------------------------------------------------------------------------------
 Software Details :
 scapy version -  2.3.2
-language used - python
+language used - python 2.7.12
 os version - ubuntu 16.10 virtual machine(for injector)
 and windows 10 for victim
 
+--------------------------------------------------------------------------------------------------------------
+pcap file
+inject_capure.pcapng
+
+packet filter
+((frame.protocols=="eth:ethertype:ip:udp:dns")&&(dns.qry.name=="bar6.pqr.com"))
 -----------------------------------------------------------------------------------------------------------------
+Design :
+
+Injector
+
+1)1st step is to parse the arguments and get it into a argparse object
+2)I  am using scapy sniff function to sniff the packets
+3)so each packest is sent to packet spoofing function for further processig
+4)here we 1st check if it is a valid dns packet with a query or not
+5)Then we form a dns response packet with all the fields similar to actual response and
+send this spoofed packet using python send method
+6)if hostfile is provided then only those hostnames are rplyed back with the respective
+ip addresses other wise all the hostnames are attacked
+
+Detector
+1)1st step is to parse the arguments and get it into a argparse object
+2)For spoofing detection  basically all the previous DNS responses are hashed
+3) when new packet arrives 1st we check if it is a valid dns response or not
+4)The dst ip ,sport,dport and question name should match for the present dns packet and previous one
+for initial level of screening
+
+in the second level we eliminate false positives as follows
+
+False positive detection
+1)we check if mac address of the present packet and the stored packet are qual or not
+if not there is a spoofing attempt
+2) we check if at least one answer of response record  of the present packet and the stored packet are equal or not
+if not there is a spoofing attempt
+3)we also check the ttl field in the same way if there is a mismatch we conclude as some spoofing attack
+
+---------------------------------------------------------------------------------------------------------------------
 Reference -
 https://www.sans.org/
 https://thepacketgeek.com/scapy-p-09-scapy-and-dns/
@@ -70,25 +101,5 @@ https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-of-eth
 
 --------------------------------------------------------------------------------------------------------------------------
 
-Guidelines for HW4 submission
-Please take care of the following general guidelines before hw4 submission:
 
-1. Compress your submission folder using tar-gzip. Do not just rename the compressed folder to change the extensions to .tar.gz .
 
-2. Name your final submission <SBU_ID>_<Last_Name>.tar.gz
-
-3. Add Makefile(if needed)
-
-4. Please add a sample pcap trace that works with your program.
-
-4. In your report.txt, for both dnsinject and dnsdetect have a dedicated section on
- How to compile,
- Working examples of commands to run your program
- General design
- How do you take care of false positives( in case of dnsdetect)
-The OS version you have tested your code on, Language and the version used.
-Detection output for the attached pcap trace file.
-
-5. If you have used any standard code available over the internet, even if for a part of your hw, make sure you provide the citation
-
-Please follow all the instructions given with the homework.
