@@ -24,22 +24,35 @@ start detector and read from pcap file ::
 sudo python dns_packet_detector.py
 
 output::
-2017-12-09 22:52:25 DNS poisoning attempt
-TXID 61345 Request 0.client-channel.google.com.
-Answer1 172.24.24.212
-Answer2 173.194.204.189
+2017-12-10 20:57:52 DNS poisoning attempt
+TXID 62198 Request dyn.keepa.com.
+Answer1 172.24.17.11
+Answer2 148.251.130.134
 
 
-2017-12-09 22:52:25 DNS poisoning attempt
-TXID 61345 Request 0.client-channel.google.com.
-Answer1 172.24.24.212
-Answer2 173.194.204.189
+2017-12-10 20:57:56 DNS poisoning attempt
+TXID 58515 Request arc.msn.com.
+Answer1 172.24.17.11
+Answer2 65.52.108.103
 
 
-2017-12-09 22:52:44 DNS poisoning attempt
-TXID 22110 Request mail.google.com.
-Answer1 172.24.24.212
-Answer2 172.217.12.165
+2017-12-10 20:58:15 DNS poisoning attempt
+TXID 25697 Request fls-na.amazon.com.
+Answer1 172.24.17.11
+Answer2 34.226.16.30 34.236.97.196 52.5.207.149 107.21.53.248 34.202.82.14 34.192.131.202 34.204.253.230 34.238.14.186
+
+
+2017-12-10 20:58:15 DNS poisoning attempt
+TXID 16993 Request images-na.ssl-images-amazon.com.
+Answer1 172.24.17.11
+Answer2 52.84.32.155
+
+
+2017-12-10 20:58:15 DNS poisoning attempt
+TXID 9149 Request s.amazon-adsystem.com.
+Answer1 172.24.17.11
+Answer2 72.21.206.140
+
 
 *****************************************************************************************************************
 sudo python dns_packet_detector.py -r inject_capture.pcap
