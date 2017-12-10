@@ -1,19 +1,74 @@
 Design :
+false positives :
+ttl
+same record
+mac
+____________________________________________________________________________________________________________
+commands:
+
+INJECTOR
+sudo python -m SimpleHTTPServer 80 ->(for starting simple http server)
+
+start injector and read hostnames from file
+sudo python  dns_packet_injector.py  -h hostnames
+
+start injector to monitor all the interfaces
+sudo python  dns_packet_injector.py
+
+start injector to monitor on particular interface
+sudo python  dns_packet_injector.py -i enp0s3
+
+start injector to monitor on particular interface and expression
+sudo python  dns_packet_injector.py -i enp0s3 ip src 172.24.17.226
 
 
 
+------------------------------------------------------------------------------------------------------
+DETECTOR
+start detector and read from pcap file ::
+sudo python dns_packet_detector.py
+
+output::
+2017-12-09 22:52:25 DNS poisoning attempt
+TXID 61345 Request 0.client-channel.google.com.
+Answer1 172.24.24.212
+Answer2 173.194.204.189
+
+
+2017-12-09 22:52:25 DNS poisoning attempt
+TXID 61345 Request 0.client-channel.google.com.
+Answer1 172.24.24.212
+Answer2 173.194.204.189
+
+
+2017-12-09 22:52:44 DNS poisoning attempt
+TXID 22110 Request mail.google.com.
+Answer1 172.24.24.212
+Answer2 172.217.12.165
+
+*****************************************************************************************************************
+sudo python dns_packet_detector.py -r /home/osboxes/Desktop/inject_capture.pcapng
+output ::
+1981-02-28 21:28:58 DNS poisoning attempt
+TXID 19258 Request bar6.pqr.com.
+
+Answer1 
+Answer2 172.24.24.212
+
+--------------------------------------------------------------------------------------------------------
 Software Details :
 scapy version -  2.3.2
 language used - python
 os version - ubuntu 16.10 virtual machine(for injector)
 and windows 10 for victim
 
+-----------------------------------------------------------------------------------------------------------------
 Reference -
 https://www.sans.org/
 https://thepacketgeek.com/scapy-p-09-scapy-and-dns/
 https://stackoverflow.com/questions/24196932/how-can-i-get-the-ip-address-of-eth0-in-python
-https://stackoverflow.com/questions/20165843/argparse-how-to-handle-variable-number-of-arguments-nargs
 
+--------------------------------------------------------------------------------------------------------------------------
 
 Guidelines for HW4 submission
 Please take care of the following general guidelines before hw4 submission:
