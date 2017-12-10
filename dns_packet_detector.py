@@ -89,9 +89,10 @@ def previous_packet(pack):
     if len(detect_dict) == 1000:
         detect_dict.clear()
     if pack.haslayer(DNSRR) and pack.haslayer(DNS):
-        prev_pack = detect_dict.get(pack[DNS].id, None)
+        key = pack[IP].dst+'_'+str(pack[DNS].id)
+        prev_pack = detect_dict.get(key , None)
         if prev_pack is None:
-            detect_dict[pack[IP].dst+'_'+pack[DNS].id] = pack
+            detect_dict[key] = pack
         else:
             return prev_pack
     else:
