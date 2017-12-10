@@ -45,7 +45,8 @@ def executor():
         hf_flag = 1
     if parsed_args.host_names:
         load_file(parsed_args.host_names)
-
+    if parsed_args.bpf_filter:
+        parsed_args.bpf_filter = " ".join(parsed_args.bpf_filter)
     filter = "udp port 53 and {bpf}".format(bpf=parsed_args.bpf_filter) if parsed_args.bpf_filter else 'udp port 53'
     if parsed_args.interface is not None:
         sniff(filter=filter, iface=parsed_args.interface, store=0, prn=packet_spoofing)

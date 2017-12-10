@@ -11,6 +11,8 @@ def executor():
     if parsed_args.interface and parsed_args.trace_file_path:
         print "Please use interface or trace option"
         return
+    if parsed_args.bpf_filter:
+        parsed_args.bpf_filter = " ".join(parsed_args.bpf_filter)
 
     if parsed_args.trace_file_path:
         sniff(filter=parsed_args.bpf_filter, prn=spoofing_detect, store=0, offline=parsed_args.trace_file_path)
