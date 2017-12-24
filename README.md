@@ -75,8 +75,5 @@ TXID 0x5cce Request www.example.com
 Answer1 [List of IP addresses]
 Answer2 [List of IP addresses]
 
-For both dnsinject and dnsdetect, feel free to use parts or build upon the
-code of your 'mydump' tool from Homework 2. You are free to pick any
-programming language you like for both tools, as long as it is easy to install
-and configure on a modern Linux system (e.g., C, C++, python, ruby).
+
 
